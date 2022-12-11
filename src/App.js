@@ -13,7 +13,7 @@ function App() {
       return ;
     }
     setFollowers(data[page])
-  }, [loading])
+  }, [loading, page])
 
 
   return <main>
@@ -29,6 +29,23 @@ function App() {
           )
         })}
       </div>
+      {!loading &&  <div className='btn-container'>
+      {page !== 0 && <button className='prev-btn' onClick={() =>{
+        setPage((prev) => prev-1)
+      }}>prev</button>}
+      
+        {data.map((item, index) =>{
+          return (
+            <button key={index} className={`page-btn ${index === page ? 'active-btn' : ''}`} onClick={() =>{setPage(index)}}>{index+1}</button>
+          )
+        })}
+        {page !== 11 && <button className='prev-btn' onClick={() =>{
+          setPage((prev) => prev+1)
+        }}>next</button>}
+        
+      </div> 
+      
+      }
     </section>
   </main>
 }
